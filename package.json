@@ -14,7 +14,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "npm-run-all buildReact replace",
+    "buildReact": "react-scripts build",
+    "replace": "replace-in-file --configFile=./replace.cjs"
   },
   "eslintConfig": {
     "extends": [
@@ -32,5 +34,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "replace-in-file": "^7.0.1"
   }
 }
