@@ -1,16 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { jsonDataGet } from './lib/elecUtils';
 
 const App = () => {
-    const endPoint = 'http://localhost:3000'
+    const [clientData, setClientData] = useState(undefined)
 
-    useEffect(() => {
-        fetch(`${endPoint}/load/dataJson`, {
-            mode: 'no-cors'
+    jsonDataGet()
+        .then(result => {
+            if (result !== false) {
+                // setClientData(result.data)
+                console.log(result.data)
+            } else {
+                // setClientData(undefined)
+                console.log(result)
+            }
+            // console.log(clientData)
         })
-        .then(data => console.log('data', data))
-        .catch(err => console.log('ERROR', err))
-    }, [])
+
+    useEffect(() => {}, [])
 
     return (
         <div className="App">
