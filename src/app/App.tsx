@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import "primereact/resources/themes/vela-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Image } from 'primereact/image';
+import { Card } from 'primereact/card';
 
 interface ApiResponse {
   error: boolean;
   errorMsg: string;
   data: any; // Replace 'any' with the actual type of your JSON data
 }
-
 
 function App() {
   const [responseData, setResponseData] = useState<ApiResponse>({ error: false, errorMsg: '', data: null });
@@ -44,7 +51,7 @@ function App() {
   }
 
   //create a singular card element
-  function Card({ index }: { index: number }) {
+  function Cards({ index }: { index: number }) {
     const data = responseData.data.data.data[index];
     const idKey = data.hasOwnProperty('adverts_id') ? 'adverts_id' : 'advert_playlist_id';
     const nameKey = data.hasOwnProperty('adverts_name') ? 'adverts_name' : 'playlist_name';
@@ -105,168 +112,108 @@ function App() {
 
   const cardComponents = [];
   for (let i = 0; i < cardIndices.length; i++) {
-    cardComponents.push(<Card key={i} index={cardIndices[i]} />);
+    cardComponents.push(<Cards key={i} index={cardIndices[i]} />);
   }
 
   return (
-    <div className="App">
-      <h1>Screen Summary</h1>
+    <body>
       {responseData.data ? (
-        <div>
-          <div className="card" id="team_card">
-            <div className="title">2023: PX Team</div>
-            <div className="content-wrapper">
-              <div className="content_card">
-                <span className="bold_text">
-                  User ID:
-                </span>
-                <span className="text">
-                  {JSON.stringify(responseData.data.data.screen.user_screens_user_id, null, 2)}
-                </span>
+        <div className="app_container">
+          <div className="card_container">
+            <Card className="team_card" title="2023: PX Team">
+              <div className="content-wrapper">
+                <div className="info_card">
+                  <span className="bold_text">
+                    User ID:
+                  </span>
+                  <span className="text">
+                    {JSON.stringify(responseData.data.data.screen.user_screens_user_id, null, 2)}
+                  </span>
+                </div>
+                <div className="info_card">
+                  <span className="bold_text">
+                    Player ID:
+                  </span>
+                  <span className="text">
+                    {JSON.stringify(responseData.data.data.screen.user_screens_mediaplayer_id, null, 2)}
+                  </span>
+                </div>
               </div>
-              <div className="content_card">
-                <span className="bold_text">
-                  Active:
-                </span>
-                <span className="text">
-                  {/* {JSON.stringify(responseData.data.data.screen.screen_active, null, 2)} */
-                    responseData.data ? (
-                      responseData.data.data.screen.screen_active === 1 ? " Yes" : " No"
-                    ) : (
-                      "Loading..." // You can display a loading message here while data is being fetched
-                    )
-                  }
-                </span>
+              <div className="content-wrapper">
+                <div className="info_card">
+                  <span className="bold_text">
+                    Height:
+                  </span>
+                  <span className="text">
+                    {JSON.stringify(responseData.data.data.screen.screen_height, null, 2) + "px"}
+                  </span>
+                </div>
+                <div className="info_card">
+                  <span className="bold_text">
+                    Width:
+                  </span>
+                  <span className="text">
+                    {JSON.stringify(responseData.data.data.screen.screen_width, null, 2) + "px"}
+                  </span>
+                </div>
               </div>
-            </div>
-            <div className="content-wrapper">
-              <div className="content_card">
-                <span className="bold_text">
-                  Screen ID:
-                </span>
-                <span className="text">
-                  {JSON.stringify(responseData.data.data.screen.screen_id, null, 2)} 
-                </span>
-              </div>
-              <div className="content_card">
-                <span className="bold_text">
-                  Height:
-                </span>
-                <span className="text">
-                  {JSON.stringify(responseData.data.data.screen.screen_height, null, 2) + "px"}
-                </span>
-              </div>
-            </div>
-            <div className="content-wrapper">
-              <div className="content_card">
-                <span className="bold_text">
-                  Player ID:
-                </span>
-                <span className="text">
-                  {JSON.stringify(responseData.data.data.screen.user_screens_mediaplayer_id, null, 2)}
-                </span>
-              </div>
-              <div className="content_card">
-                <span className="bold_text">
-                  Width:
-                </span>
-                <span className="text">
-                  {JSON.stringify(responseData.data.data.screen.screen_width, null, 2) + "px"}
-                </span>
-              </div>
-            </div>
-            <div className="content-wrapper">
-              <div className="content_card">
-                <span className="bold_text">
-                  Profiles ID:
-                </span>
-                <span className="text">
-                  {JSON.stringify(responseData.data.data.profile.id, null, 2)} 
-                </span>
-              </div>
-              <div className="content_card">
-                <span className="bold_text">
-                  Ad Only:
-                </span>
-                <span className="text">
-                  {/* {JSON.stringify(responseData.data.data.screen.user_screens_advert_only, null, 2)} */
-                    responseData.data ? (
-                      responseData.data.data.screen.screen_active === 1 ? " No" : " Yes"
-                    ) : (
-                      "Loading..." // You can display a loading message here while data is being fetched
-                    )
-                  }
-                </span>
-              </div>
-            </div>
-            <div className="content-wrapper">
-              <div className="content_card">
-                <span className="bold_text">
-                  Last Sync:
-                </span>
-                <span className="text">
-                  {/* {JSON.stringify(responseData.data.data.screen.user_screens_last_sync, null, 2)} */
-                    responseData.data ? (
-                      formatDate(responseData.data.data.screen.user_screens_last_sync)
-                    ) : (
-                      "Loading..." // You can display a loading message here while data is being fetched
-                    )
-                  }
+              <div className="content-wrapper">
 
-                </span>
+
               </div>
-              <div className="content_card">
-                <span className="bold_text">
-                  Random Ads:
-                </span>
-                <span className="text">
-                  {
-                    // JSON.stringify(responseData.data.data.screen.user_screens_random_adverts, null, 2)
-                    responseData.data ? (
-                      responseData.data.data.screen.screen_active === 1 ? " No" : " Yes"
-                    ) : (
-                      "Loading..." // You can display a loading message here while data is being fetched
-                    )
-                  }
-                </span>
+              <div className="content-wrapper">
+                <div className="info_card">
+                  <span className="bold_text">
+                    Last Sync:
+                  </span>
+                  <span className="text">
+                    {/* {JSON.stringify(responseData.data.data.screen.user_screens_last_sync, null, 2)} */
+                      responseData.data ? (
+                        formatDate(responseData.data.data.screen.user_screens_last_sync)
+                      ) : (
+                        "Loading..." // You can display a loading message here while data is being fetched
+                      )
+                    }
+
+                  </span>
+                </div>
+                <div className="info_card">
+                  <span className="bold_text">
+                    Run Time:
+                  </span>
+                  <span className="text">
+                    {JSON.stringify(responseData.data.data.screen.screen_id, null, 2)}
+                  </span>
+                </div>
               </div>
-            </div>
-            <div className="content-wrapper">
-              <div className="content_card">
-                <span className="bold_text">
-                  Run Time:
-                </span>
-                <span className="text">
-                  {JSON.stringify(responseData.data.data.screen.screen_id, null, 2)}
-                </span>
-              </div>
-              <div className="content_card">
-                <span className="bold_text">
-                  Publish Block:
-                </span>
-                <span className="text">
-                  {/* {JSON.stringify(responseData.data.data.screen.user_screens_publish_block, null, 2)} */
-                    responseData.data ? (
-                      responseData.data.data.screen.screen_active === 1 ? " No" : " Yes"
-                    ) : (
-                      "Loading..." // You can display a loading message here while data is being fetched
-                    )
-                  }
-                </span>
-              </div>
-            </div>
+            </Card>
           </div>
-          <div>
-            <h1>Media and playlist data</h1>
-            <div className="grid_container">
-              {cardComponents}
-            </div>
+          <div className="card_container">
+            {responseData.data.data.data.map((dataItem: any, index: number) => (
+              <Card className="content_card" key={index}>
+                <div className="title">
+                  {dataItem.hasOwnProperty('adverts_name') ? dataItem.adverts_name : dataItem.playlist_name}
+                </div>
+                <div className="label">
+                  {dataItem.hasOwnProperty('adverts_id') ? 'Advert' : 'Playlist'}
+                </div>
+                <div className="time_card">
+                  Refresh Time: {minutesToHHMM(dataItem.adverts_refresh_time)} mins
+                </div>
+                {dataItem.hasOwnProperty('imageURL') && (
+                  <div className="image-container">
+                    <img src={dataItem.imageURL} alt="Image" />
+                  </div>
+                )}
+              </Card>
+            ))
+            }
           </div>
         </div>
       ) : (
         <p>No data available</p>
       )}
-    </div>
+    </body>
   );
 }
 

@@ -5,73 +5,84 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+}
+
+.title {
+  background-color: #20508a;
+  font-size: 12px;
+  color: white;
+  margin: 4px;
+  padding: 7px 12px;
+  border-radius: 16px;
+  min-height: 32px;
+  font-weight: 500;
 }
 
 .label {
-    background-color: #3b80d4;
-    font-size: 12px;
-    color: #fff;
-    margin: 4px;
-    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
-    display: inline-flex;
-    padding: 7px 12px;
-    border-radius: 16px;
-    align-items: center;
-    cursor: default;
-    min-height: 32px;
-    height: 1px;
-    font-weight: 500;
+  background-color: #3b80d4;
+  font-size: 12px;
+  color: white;
+  margin: 4px;
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 16px;
+  align-items: center;
+  min-height: 32px;
+  height: 1px;
+  font-weight: 500;
 }
 
-#team_card {
-  padding: 10px;
-  width: 450px;
-}
-
-#team_card .content_card {
-  background-color: #d8e0e5;
+.content_card {
+  min-width: 150px;
+  max-width: 280px;
+  max-height: 200px;
   display: inline-block;
-  width: 200px;
+  margin: 5px;
 }
 
-.card .content_card {
+.time_card {
   background-color: #d8e0e5;
-  height: 24px;
-  line-height: 22px;
-  padding-left: 10px;
-  border-radius: 10px;
+  color: black; 
+  border-radius: 16px;
+  padding: 7px;
+}
+
+.info_card {
+  background-color: #d8e0e5;
+  color: black;
+  border-radius: 16px;
+  padding: 7px;
+  display: inline-block; /* Change display to inline-block */
   margin: 5px;
-  
+  min-width: 180px;
+  max-width: 400px;
 }
 
 .bold_text {
   font-weight: 500;
 }
 
-.grid_container {
-  display: grid;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
-  grid-gap: 5px;
-  width: 100%;
+.text {
+  padding-left: 3px;
 }
 
-.card {
-  background: #ebeff2;
-  height: 100%;
-  min-width: 250px;
-  border-radius: 5px;
-  margin: 10px;
+.content_wrapper {
+  display: inline-block;
 }
 
+.card_container {
+  padding: 10px;
+  margin: 5px;
+}
 
-.card .title {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
+.app_container {
+  display: flex;
+}
+
+.team_card {
+  margin: 5px;
+  min-width: 200px;
+  max-width: 500px;
 }
 
 code {
