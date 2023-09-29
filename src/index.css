@@ -42,7 +42,8 @@ body {
   margin: 5px;
   background-color: var(--highlight-bg);
   color: var(--highlight-text-color);
-  border-radius: var(--border-radius)
+  border-radius: var(--border-radius);
+  border: 1px solid rgb(79, 111, 193);
 }
 
 .time_card {
@@ -50,8 +51,8 @@ body {
   color: black; 
   border-radius: 16px;
   padding: 7px;
+  border: 1px solid rgb(105, 133, 206);
 }
-
 .info_card {
   background-color: #d8e0e5;
   color: black;
