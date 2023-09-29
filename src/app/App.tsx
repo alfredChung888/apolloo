@@ -244,8 +244,8 @@ function App() {
             </Card>
             <Card className="Local_Storage">
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div style={{ background: '#275894', padding: '0.2rem', borderRadius: '70%', marginRight: '0.5rem' }}>
-                  <i className="pi pi-database" style={{ fontSize: '1.5rem' }}></i>
+                <div style={{ background: 'white', padding: '0.2rem', borderRadius: '70%', marginRight: '0.5rem' }}>
+                  <i className="pi pi-database" style={{ fontSize: '1.5rem', color: '#275894' }}></i>
                 </div>
                 <span style={{ fontSize: '1.2rem' }}>Local Storage</span>
               </div>
